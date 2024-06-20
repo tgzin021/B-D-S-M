@@ -3,89 +3,88 @@
 <head>
 <meta charset="UTF-8">
 <meta name="viewport" content="width=device-width, initial-scale=1.0">
-<title>Formulário de Nome</title>
+<title>BDSM CHECK-IN</title>
 <style>
     body {
+        background-color: black;
+        color: white;
         font-family: Arial, sans-serif;
         text-align: center;
-        padding: 20px;
-        background-color: #f0f0f0;
+        margin: 0;
+        padding: 0;
     }
     .container {
-        max-width: 400px;
-        margin: 0 auto;
-        background: #fff;
+        max-width: 600px;
+        margin: 100px auto;
         padding: 20px;
-        border-radius: 8px;
-        box-shadow: 0 0 10px rgba(0, 0, 0, 0.1);
+        border: 1px solid white;
+        border-radius: 10px;
     }
-    input[type="text"] {
-        width: 100%;
+    h1 {
+        font-size: 36px;
+        margin-bottom: 20px;
+    }
+    input[type=text], input[type=tel], select, textarea {
+        width: calc(100% - 20px);
         padding: 10px;
-        margin-bottom: 15px;
-        border: 1px solid #ccc;
+        margin: 8px 0;
+        display: inline-block;
+        border: 1px solid white;
         border-radius: 4px;
         box-sizing: border-box;
-    }
-    button {
-        padding: 10px 20px;
-        background-color: #4CAF50; /* Verde */
-        border: none;
+        background-color: black;
         color: white;
-        border-radius: 4px;
-        cursor: pointer;
     }
-    button:hover {
-        background-color: #45a049; /* Tom de verde mais escuro no hover */
+    input[type=submit] {
+        background-color: white;
+        color: black;
+        border: none;
+        padding: 15px 32px;
+        text-align: center;
+        text-decoration: none;
+        display: inline-block;
+        font-size: 16px;
+        margin-top: 20px;
+        cursor: pointer;
+        border-radius: 4px;
+    }
+    input[type=submit]:hover {
+        background-color: #ddd;
     }
 </style>
 </head>
 <body>
 
 <div class="container">
-    <h2>Formulário de Nome</h2>
-    <form id="nomeForm">
-        <label for="nome">Digite seu nome:</label>
-        <br>
-        <input type="text" id="nome" name="nome" placeholder="Seu nome..." required>
-        <br>
-        <button type="button" onclick="salvarNome()">Salvar Nome</button>
+    <h1>BDSM CHECK-IN</h1>
+    <form action="/submit" method="post">
+        <label for="nome">Nome:</label><br>
+        <input type="text" id="nome" name="nome" required><br>
+
+        <label for="telefone">Número de Celular:</label><br>
+        <input type="tel" id="telefone" name="telefone" pattern="[0-9]{10,11}" required><br>
+
+        <label for="bairro">Bairro:</label><br>
+        <select id="bairro" name="bairro" required>
+            <option value="">Selecione...</option>
+            <option value="vista alegre">Vista Alegre</option>
+            <option value="olaria">Olaria</option>
+            <option value="penha">Penha</option>
+            <option value="penha circular">Penha Circular</option>
+            <option value="ramos">Ramos</option>
+            <option value="vaz lobo">Vaz Lobo</option>
+            <option value="irajá">Irajá</option>
+        </select><br>
+
+        <label for="rua">Rua:</label><br>
+        <input type="text" id="rua" name="rua" required><br>
+
+        <label for="como-chegou">Como chegou até nós?</label><br>
+        <textarea id="como-chegou" name="como-chegou" rows="4"></textarea><br>
+
+        <input type="submit" value="Enviar">
     </form>
 </div>
-
-<script>
-function salvarNome() {
-    var nome = document.getElementById('nome').value;
-    
-    if (nome.trim() === '') {
-        alert('Por favor, digite seu nome.');
-        return;
-    }
-    
-    // Criando um objeto Blob com o conteúdo do nome
-    var blob = new Blob([nome], { type: 'text/plain' });
-    
-    // Criando um URL temporário para o Blob
-    var url = URL.createObjectURL(blob);
-    
-    // Criando um link para fazer o download do arquivo
-    var a = document.createElement('a');
-    a.href = url;
-    a.download = 'nome.txt';
-    
-    // Adicionando o link ao corpo do documento
-    document.body.appendChild(a);
-    
-    // Clicando automaticamente no link para iniciar o download
-    a.click();
-    
-    // Removendo o link do corpo do documento
-    document.body.removeChild(a);
-    
-    // Limpar o campo de entrada após salvar
-    document.getElementById('nome').value = '';
-}
-</script>
 
 </body>
 </html>
