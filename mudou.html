@@ -1,0 +1,91 @@
+<!DOCTYPE html>
+<html lang="pt-br">
+<head>
+<meta charset="UTF-8">
+<meta name="viewport" content="width=device-width, initial-scale=1.0">
+<title>Formulário de Nome</title>
+<style>
+    body {
+        font-family: Arial, sans-serif;
+        text-align: center;
+        padding: 20px;
+        background-color: #f0f0f0;
+    }
+    .container {
+        max-width: 400px;
+        margin: 0 auto;
+        background: #fff;
+        padding: 20px;
+        border-radius: 8px;
+        box-shadow: 0 0 10px rgba(0, 0, 0, 0.1);
+    }
+    input[type="text"] {
+        width: 100%;
+        padding: 10px;
+        margin-bottom: 15px;
+        border: 1px solid #ccc;
+        border-radius: 4px;
+        box-sizing: border-box;
+    }
+    button {
+        padding: 10px 20px;
+        background-color: #4CAF50; /* Verde */
+        border: none;
+        color: white;
+        border-radius: 4px;
+        cursor: pointer;
+    }
+    button:hover {
+        background-color: #45a049; /* Tom de verde mais escuro no hover */
+    }
+</style>
+</head>
+<body>
+
+<div class="container">
+    <h2>Formulário de Nome</h2>
+    <form id="nomeForm">
+        <label for="nome">Digite seu nome:</label>
+        <br>
+        <input type="text" id="nome" name="nome" placeholder="Seu nome..." required>
+        <br>
+        <button type="button" onclick="salvarNome()">Salvar Nome</button>
+    </form>
+</div>
+
+<script>
+function salvarNome() {
+    var nome = document.getElementById('nome').value;
+    
+    if (nome.trim() === '') {
+        alert('Por favor, digite seu nome.');
+        return;
+    }
+    
+    // Criando um objeto Blob com o conteúdo do nome
+    var blob = new Blob([nome], { type: 'text/plain' });
+    
+    // Criando um URL temporário para o Blob
+    var url = URL.createObjectURL(blob);
+    
+    // Criando um link para fazer o download do arquivo
+    var a = document.createElement('a');
+    a.href = url;
+    a.download = 'nome.txt';
+    
+    // Adicionando o link ao corpo do documento
+    document.body.appendChild(a);
+    
+    // Clicando automaticamente no link para iniciar o download
+    a.click();
+    
+    // Removendo o link do corpo do documento
+    document.body.removeChild(a);
+    
+    // Limpar o campo de entrada após salvar
+    document.getElementById('nome').value = '';
+}
+</script>
+
+</body>
+</html>
